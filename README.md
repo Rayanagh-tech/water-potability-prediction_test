@@ -1,48 +1,108 @@
-📌 Project Overview
-This project predicts water potability using a machine learning model. The pipeline integrates FastAPI for serving predictions, DVC for data versioning, Apache Airflow for workflow automation, and Apache Spark for scalable data processing.
+# 🌊🚰 Water Potability Prediction API with DVC pipeline
 
-⚡ Features
-✅ FastAPI Backend - Real-time prediction API
-✅ DVC Integration - Version control for data & models
-✅ Apache Airflow - Automates data ingestion & ML pipeline
-✅ Apache Spark - Scalable data processing & feature engineering
+## 📌 Project Overview
+This project provides a **machine learning-powered API** for predicting water potability based on chemical properties. It integrates multiple technologies to ensure efficient data processing, model versioning, and automated workflow execution:
 
- 🚀 Installation & Setup
-1️⃣ Clone the Repository
+- **FastAPI** → Serves real-time predictions
+- **DVC (Data Version Control)** → Manages datasets and ML models
+- **Apache Airflow** → Automates data ingestion, transformation, and ML pipeline execution
+- **Apache Spark** → Enables large-scale data processing and feature engineering
 
+## ⚡ Features
+- ✅ **FastAPI Backend** - Provides a high-performance REST API for predictions
+- ✅ **DVC Integration** - Ensures reproducibility and version control for data & models
+- ✅ **Apache Airflow** - Automates workflow execution, including model retraining and data updates
+- ✅ **Apache Spark** - Facilitates scalable data processing for large datasets
+- ✅ **Docker-Ready** - Easily containerized for cloud deployments
+- ✅ **CI/CD Support** - Can be integrated with GitHub Actions for continuous deployment
+
+## 🚀 Installation & Setup
+### 1️⃣ Clone the Repository
+```bash
 git clone https://github.com/yourusername/water-potability-prediction.git
 cd water-potability-prediction
+```
 
-2️⃣ Create a Virtual Environment & Install Dependencies
-
+### 2️⃣ Create a Virtual Environment & Install Dependencies
+```bash
 python -m venv venv
 source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate     # On Windows
+venv\Scripts\activate    # On Windows
 pip install -r requirements.txt
+```
 
-3️⃣ Set Up DVC & Retrieve Data
+### 3️⃣ Set Up DVC & Retrieve Data
 Ensure DVC is installed:
-
+```bash
 pip install dvc
-
-
-Then, pull the dataset and model:
-
+```
+Then, pull the dataset and pre-trained model:
+```bash
 dvc pull
+```
 
-
-4️⃣ Start Apache Airflow (Optional, for Workflow Automation)
+### 4️⃣ Start Apache Airflow (Optional, for Workflow Automation)
 Initialize Airflow:
-
+```bash
 airflow db init
-airflow scheduler &
-airflow webserver -p 8082 &
-Access Airflow UI at 👉 http://localhost:8082
+airflow scheduler & airflow webserver -p 8082 &
+```
+Access the Airflow UI at 👉 [http://localhost:8082](http://localhost:8082)
 
-5️⃣ Run the FastAPI Server
+### 5️⃣ Run the FastAPI Server
+```bash
+uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+```
+API available at 👉 [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-uvicorn src.main:app --reload
+## 🏗️ API Usage
+### 1️⃣ Home Route  
+**GET /**  
+Returns a welcome message.
 
+### 2️⃣ Prediction Route  
+**POST /predict**  
 
-API available at 👉 http://127.0.0.1:8000
+#### Request Body (JSON):
+```json
+{
+  "ph": 7.1,
+  "Hardness": 120.5,
+  "Solids": 21000.0,
+  "Chloramines": 7.5,
+  "Sulfate": 350.2,
+  "Conductivity": 400.0,
+  "Organic_carbon": 10.2,
+  "Trihalomethanes": 70.5,
+  "Turbidity": 4.5
+}
+```
+
+#### Response:
+- **"Water is Consumable"** → If the water is safe for drinking
+- **"Water is not Consumable"** → If the water is unsafe
+
+## 📡 Deployment
+### 🛠️ Deploy on Render
+1. Push your project to GitHub
+2. Connect the repository to [Render](https://render.com/)
+3. Set up a FastAPI service and define the start command:
+   ```bash
+   uvicorn src.main:app --host 0.0.0.0 --port 8000
+   ```
+4. Deploy and access your API via the Render-generated URL
+
+### 🐳 Docker Deployment
+1. Build the Docker image:
+   ```bash
+   docker build -t water-potability-api .
+   ```
+2. Run the container:
+   ```bash
+   docker run -p 8000:8000 water-potability-api
+   ```
+3. Access the API at [http://localhost:8000](http://localhost:8000)
+
+## 🐟 License
+MIT License
 
