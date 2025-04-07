@@ -6,15 +6,12 @@ This project provides a **machine learning-powered API** for predicting water po
 - **FastAPI** → Serves real-time predictions
 - **DVC (Data Version Control)** → Manages datasets and ML models
 - **Apache Airflow** → Automates data ingestion, transformation, and ML pipeline execution
-- **Apache Spark** → Enables large-scale data processing and feature engineering
 
 ## ⚡ Features
 - ✅ **FastAPI Backend** - Provides a high-performance REST API for predictions
 - ✅ **DVC Integration** - Ensures reproducibility and version control for data & models
 - ✅ **Apache Airflow** - Automates workflow execution, including model retraining and data updates
-- ✅ **Apache Spark** - Facilitates scalable data processing for large datasets
 - ✅ **Docker-Ready** - Easily containerized for cloud deployments
-- ✅ **CI/CD Support** - Can be integrated with GitHub Actions for continuous deployment
 
 ## 🚀 Installation & Setup
 ### 1️⃣ Clone the Repository
